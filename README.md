@@ -1,1 +1,1 @@
-# Leet-code
+# code-challenge
