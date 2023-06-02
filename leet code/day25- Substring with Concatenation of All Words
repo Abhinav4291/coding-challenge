@@ -1,0 +1,26 @@
+class Solution:
+    def findSubstring(self, s: str, words: List[str]) -> List[int]:
+        if len(words) == 0 or len(words[0]) == 0:
+            return []
+
+        word_len = len(words[0])
+        word_count = len(words)
+        total_len = word_len * word_count
+
+        word_dict = Counter(words)
+        indices = []
+
+        for i in range(len(s) - total_len + 1):
+            curr_dict = Counter()
+            j = 0
+            while j < total_len:
+                word = s[i + j: i + j + word_len]
+                if word not in word_dict or curr_dict[word] >= word_dict[word]:
+                    break
+                curr_dict[word] += 1
+                j += word_len
+
+            if j == total_len:
+                indices.append(i)
+
+        return indices
